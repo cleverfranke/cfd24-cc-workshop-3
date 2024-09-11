@@ -82,9 +82,6 @@ function draw() {
     // We calculate the y position based on the index of the datapoint and map it to 100 and height - 100 to keep some margin
     let y = map(i, 0, data.length - 1, 100, SKETCHWIDTH - 100);
 
-    // We calculate the y position based on the amount
-    // let y = map(data[i].amount, dataMin, dataMax, SKETCHHEIGHT - 100, 100);
-
     // We draw a circle at the calculated position
     ellipse(x, y, 10);
 
