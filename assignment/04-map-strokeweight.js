@@ -36,17 +36,8 @@ function draw() {
     // We calculate the y position based on the index of the datapoint and map it to 100 and height - 100 to keep some margin
     let y = map(i, 0, data.length - 1, 100, SKETCHHEIGHT - 100);
 
-    // The default shapeColor is red
-    let shapeColor = "red";
-
-    // If the amount is even, we set the shapeColor to blue
-    if (data[i].amount % 2 === 0) {
-      shapeColor = "blue";
-    }
-
-    // Set the fill and stroke color to the shapeColor
-    fill(shapeColor);
-    stroke(shapeColor);
+    // Set the fill color to black
+    fill(0);
 
     // We draw a circle at the calculated position
     ellipse(x, y, BASE * 10);
@@ -59,7 +50,6 @@ function draw() {
       // We'll map the position of the letter in the name to the stroke weight using map
       const strokeWidth = map(j, 0, data[i].name.length - 1, 10, 1);
       strokeWeight(strokeWidth);
-      stroke(shapeColor);
 
       // Draw the outward circles
       ellipse(x, y, BASE * 20 * j);

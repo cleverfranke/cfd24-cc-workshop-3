@@ -53,7 +53,7 @@ let parameters = {
 
 function setup() {
   // After calling setResponsiveSizing, we can use SKETCHWIDTH, SKETCHHEIGHT and BASE
-  setResponsiveSizing(0.8);
+  setResponsiveSizing(0.5);
   createCanvas(SKETCHWIDTH, SKETCHHEIGHT);
 
   // We set the background color
@@ -85,7 +85,7 @@ function draw() {
     // We draw a circle at the calculated position
     ellipse(x, y, 10);
 
-    // We draw the name of the person below the circle for debugging purposes
+    // We draw the name of the person below the circle
     text(data[i].name, x, y + 20);
   }
 }
