@@ -27,6 +27,10 @@ function setup() {
 }
 
 function draw() {
+  // Clear the background first
+  background(250);
+
+  // Set the fill color to black
   fill(0);
 
   // Now we can use the values of the parameters to draw the ellipse
