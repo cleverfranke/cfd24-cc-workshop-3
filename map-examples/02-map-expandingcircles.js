@@ -5,7 +5,7 @@ let dataMin, dataMax;
 
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  Name: "Mapping basics",
+  Name: "Mapping expanding cirtcles",
 };
 
 function setup() {
@@ -46,10 +46,6 @@ function draw() {
     for (let j = 0; j < data[i].name.length; j++) {
       // Remove the fill
       noFill();
-
-      // We'll map the position of the letter in the name to the stroke weight using map
-      const strokeWidth = map(j, 0, data[i].name.length - 1, 10, 1);
-      strokeWeight(strokeWidth);
 
       // Draw the outward circles
       ellipse(x, y, BASE * 20 * j);

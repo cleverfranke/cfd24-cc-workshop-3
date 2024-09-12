@@ -5,7 +5,7 @@ let dataMin, dataMax;
 
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  Name: "Mapping basics",
+  Name: "Even/uneven",
 };
 
 function setup() {

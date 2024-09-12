@@ -5,7 +5,7 @@ let dataMin, dataMax;
 
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  Name: "Mapping basics",
+  Name: "Mapping complex",
 };
 
 function setup() {
@@ -68,7 +68,7 @@ function draw() {
     if (shapeType === "circle") {
       ellipse(x, y, BASE * 10);
     } else {
-      rect(x, y, BASE * 10, BASE * 10);
+      rect(x + BASE * 5, y + BASE * 5, BASE * 10, BASE * 10);
     }
 
     // We loop over all the characters in the name and draw the slightly bigger circles
