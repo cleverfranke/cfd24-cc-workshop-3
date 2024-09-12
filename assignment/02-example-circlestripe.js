@@ -48,7 +48,7 @@ function draw() {
     let y = map(i, 0, dataset.length - 1, 100, SKETCHHEIGHT - 100);
 
     // Set the fill color to black
-    fill(0);
+    fill(dataset[i].numTransactions);
 
     // Draw an ellipse at the center width and the calculated y position with the calculated size
     ellipse(SKETCHWIDTH / 2, y, size, size);

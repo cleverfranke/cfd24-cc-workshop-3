@@ -3,54 +3,59 @@ let gui = new lil.GUI();
 
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  Name: "Mapping basics",
-  minCircleSize: 10,
-  maxCircleSize: 50,
+  red: 0,
+  green: 0,
+  blue: 0,
+  textString: "C°F",
+  minSize: 32,
+  maxSize: 128,
+  itemCount: 1,
 };
 
 function setup() {
   // After calling setResponsiveSizing, we can use SKETCHWIDTH, SKETCHHEIGHT and BASE
-  setResponsiveSizing(0.8);
+  setResponsiveSizing(1);
+
   createCanvas(SKETCHWIDTH, SKETCHHEIGHT);
 
   // We set the background color
   background(250);
 
+  // Limit the frameRate
+  frameRate(5);
+
+  // Randomize the rgb values
+  parameters.red = round(random(0, 255));
+  parameters.green = round(random(0, 255));
+  parameters.blue = round(random(0, 255));
+
   // We add the parameters to the GUI
-  gui.add(parameters, "Name");
-  gui.add(parameters, "minCircleSize", 1, 100, 1);
-  gui.add(parameters, "maxCircleSize", 1, 100, 1);
+  gui.add(parameters, "red", 0, 255, 1);
+  gui.add(parameters, "green", 0, 255, 1);
+  gui.add(parameters, "blue", 0, 255, 1);
+  gui.add(parameters, "textString");
 }
 
 function draw() {
-  // Clear the background first
-  background(250);
+  // Clear the background first (remove these comments to see the effect)
+  // background(250);
 
-  // Lets get the minimum and maximum values of the numTransactions property
-  let dataMin = getMinValue("numTransactions");
-  let dataMax = getMaxValue("numTransactions");
+  // Set the fill color to the values of the parameters
+  fill(parameters.red, parameters.green, parameters.blue);
 
-  // We will loop over all the data points
-  for (let i = 0; i < dataset.length; i++) {
-    // Get the value of the numTransactions property of the current data point
-    let value = dataset[i].numTransactions;
+  // Remove the stroke
+  noStroke();
 
-    // Map this value to a size between 10 and 50
-    let size = map(
-      value,
-      dataMin,
-      dataMax,
-      parameters.minCircleSize,
-      parameters.maxCircleSize
-    );
+  for (let i = 0; i < parameters.itemCount; i++) {
+    // For readability, generate the random text size based on min and max and save it in a variable
+    const fontSize = random(parameters.minSize, parameters.maxSize);
 
-    // Map the index of the data point to a position between 100 and height - 100
-    let y = map(i, 0, dataset.length - 1, 100, SKETCHHEIGHT - 100);
+    // Draw the text at a position in the center of the canvas
+    textSize(BASE * fontSize);
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
 
-    // Set the fill color to black
-    fill(0);
-
-    // Draw an ellipse at the center width and the calculated y position with the calculated size
-    ellipse(SKETCHWIDTH / 2, y, size, size);
+    fill(parameters.red, parameters.green, parameters);
+    text(parameters.textString, random(SKETCHWIDTH), random(SKETCHHEIGHT));
   }
 }
