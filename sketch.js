@@ -1,61 +1,43 @@
 // First we create a new GUI
 let gui = new lil.GUI();
 
+let dataMin, dataMax;
+
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  red: 0,
-  green: 0,
-  blue: 0,
-  textString: "C°F",
-  minSize: 32,
-  maxSize: 128,
-  itemCount: 1,
+  Name: "Start template",
+  strokeWidth: 1,
 };
 
 function setup() {
   // After calling setResponsiveSizing, we can use SKETCHWIDTH, SKETCHHEIGHT and BASE
-  setResponsiveSizing(1);
-
+  setResponsiveSizing(0.8);
   createCanvas(SKETCHWIDTH, SKETCHHEIGHT);
 
   // We set the background color
   background(250);
 
-  // Limit the frameRate
-  frameRate(5);
-
-  // Randomize the rgb values
-  parameters.red = round(random(0, 255));
-  parameters.green = round(random(0, 255));
-  parameters.blue = round(random(0, 255));
-
   // We add the parameters to the GUI
-  gui.add(parameters, "red", 0, 255, 1);
-  gui.add(parameters, "green", 0, 255, 1);
-  gui.add(parameters, "blue", 0, 255, 1);
-  gui.add(parameters, "textString");
+  gui.add(parameters, "Name");
+  gui.add(parameters, "strokeWidth", 1, 100, 0.25);
 }
 
 function draw() {
-  // Clear the background first (remove these comments to see the effect)
-  // background(250);
+  // Clear the background first
+  background(250);
 
-  // Set the fill color to the values of the parameters
-  fill(parameters.red, parameters.green, parameters.blue);
+  // We will loop over all the data points and draw an ellipse for each one
+  for (let i = 0; i < dataset.length; i++) {
+    noFill();
 
-  // Remove the stroke
-  noStroke();
+    ellipse(
+      SKETCHWIDTH / 2,
+      SKETCHHEIGHT / 2,
+      dataset[i].numTransactions,
+      dataset[i].numTransactions
+    );
 
-  for (let i = 0; i < parameters.itemCount; i++) {
-    // For readability, generate the random text size based on min and max and save it in a variable
-    const fontSize = random(parameters.minSize, parameters.maxSize);
-
-    // Draw the text at a position in the center of the canvas
-    textSize(BASE * fontSize);
-    textStyle(BOLD);
-    textAlign(CENTER, CENTER);
-
-    fill(parameters.red, parameters.green, parameters);
-    text(parameters.textString, random(SKETCHWIDTH), random(SKETCHHEIGHT));
+    strokeWeight(parameters.strokeWidth);
+    stroke(0);
   }
 }
