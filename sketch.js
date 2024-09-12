@@ -1,43 +1,43 @@
 // First we create a new GUI
 let gui = new lil.GUI();
 
-let dataMin, dataMax;
-
 // Here we keep track of the parameters we want to control and give them an initial value
 let parameters = {
-  Name: "Start template",
-  strokeWidth: 1,
+  circleSize: 50,
+  xPosition: 0,
+  yPosition: 0,
 };
 
 function setup() {
   // After calling setResponsiveSizing, we can use SKETCHWIDTH, SKETCHHEIGHT and BASE
-  setResponsiveSizing(0.8);
+  setResponsiveSizing(1);
   createCanvas(SKETCHWIDTH, SKETCHHEIGHT);
 
   // We set the background color
   background(250);
 
+  // We set the initial position of the circle to the center of the canvas
+  parameters.xPosition = SKETCHWIDTH / 2;
+  parameters.yPosition = SKETCHHEIGHT / 2;
+
   // We add the parameters to the GUI
-  gui.add(parameters, "Name");
-  gui.add(parameters, "strokeWidth", 1, 100, 0.25);
+  gui.add(parameters, "circleSize", 0, 100, 1);
+  gui.add(parameters, "xPosition", 0, SKETCHWIDTH, 1);
+  gui.add(parameters, "yPosition", 0, SKETCHHEIGHT, 1);
 }
 
 function draw() {
   // Clear the background first
   background(250);
 
-  // We will loop over all the data points and draw an ellipse for each one
-  for (let i = 0; i < dataset.length; i++) {
-    noFill();
+  // Set the fill color to black
+  fill(0);
 
-    ellipse(
-      SKETCHWIDTH / 2,
-      SKETCHHEIGHT / 2,
-      dataset[i].numTransactions,
-      dataset[i].numTransactions
-    );
-
-    strokeWeight(parameters.strokeWidth);
-    stroke(0);
-  }
+  // Now we can use the values of the parameters to draw the ellipse
+  ellipse(
+    parameters.xPosition,
+    parameters.yPosition,
+    parameters.circleSize,
+    parameters.circleSize
+  );
 }
